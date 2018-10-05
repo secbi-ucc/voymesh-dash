@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Open Voymesh Monitor</title>
+    <style>
+      #loader {
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+        visibility: visible;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        background: #fff;
+        z-index: 90000;
+      }
+
+      .btn-login{
+        /*    border: 1px solid red; */
+            cursor: pointer;
+        
+        }
+        .btn-google .line {
+          border: 1px solid #4285F4;
+        }
+        
+        .btn-facebook .line {
+          border: 1px solid #3b5998;
+        }
+        
+        .center-wrapper {
+          display: inline-block;
+          height: 3em;
+          width: 3em;
+          position: relative;
+          margin: 0;
+          padding: 0;
+          vertical-align: middle;
+          background-color:#3b5998;
+          color:white;
+        }
+        
+        .google-color{
+          background-color:#4285F4;
+        }
+        
+        .p1{
+          padding-left:1rem;
+          margin-left:-0.22rem;
+          width:12rem;
+        }
+        
+        .centerV {
+          margin: 0;
+          padding:0;
+          position: absolute;
+          top: 50%;
+          transform: translate(0, -50%)
+        }
+        .centerHV {
+          margin: 0;
+          padding:0;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%)
+        }
+        
+        .svg-wrap{
+          background-color:white;
+        }
+        
+        .btn-login{
+          width:15.3rem;
+          overflow:hidden;
+          padding:0;
+          margin:0;
+          margin-bottom:0.5rem;
+        }
+
+      #loader.fadeOut {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: calc(50% - 20px);
+        left: calc(50% - 20px);
+        background-color: #333;
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+      }
+
+      @-webkit-keyframes sk-scaleout {
+        0% { -webkit-transform: scale(0) }
+        100% {
+          -webkit-transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        } 100% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="app">
+    <div id='loader'>
+      <div class="spinner"></div>
+    </div>
+
+    <script>
+      window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        setTimeout(() => {
+          loader.classList.add('fadeOut');
+        }, 300);
+      });
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+
+
+    <script>
+
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyD6wB0fDfs5lfwRLdR4OvvkHpgcrAICnaE",
+        authDomain: "voymesh.firebaseapp.com",
+        databaseURL: "https://voymesh.firebaseio.com",
+        projectId: "voymesh",
+        storageBucket: "voymesh.appspot.com",
+        messagingSenderId: "195778258748"
+      };
+      firebase.initializeApp(config);
+
+      var provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+      firebase.auth().languageCode = 'es';
+
+      function signIn(){
+        firebase.auth().signInWithPopup(provider).then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          window.location.replace("/")
+
+          console.log(user);
+          // ...
+        }).catch(function(error) {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          console.log(errorMessage);
+          // ...
+        });
+      }
+    </script>
+    <div class="peers ai-s fxw-nw h-100vh">
+      <div class="d-n@sm- peer peer-greed h-100 pos-r bgr-n bgpX-c bgpY-c bgsz-cv" style='background-image: url("assets/static/images/bg.jpg")'>
+    
+      </div>
+      <div class="col-12 col-md-4 peer pX-40 pY-80 h-100 bgc-white scrollable pos-r" style='text-align:center; min-width: 320px;'>
+         
+        <img style="width:120px;" src="assets/static/images/mesh.png" alt="">
+        <br>
+        <br>
+        <br>
+        
+        <h4 class="fw-300 c-grey-900 mB-40">Open Voymesh Monitor</h4>
+        <hr>
+        <div class="btn-login btn-google">
+
+            <!-- -------------------- -->
+              <div class="line center-wrapper svg-wrap">
+            <svg 
+                 class="centerHV" 
+                 width="46px" 
+                 height="46px" 
+                 viewBox="0 0 46 46" 
+                 xmlns="http://www.w3.org/2000/svg">
+                <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+                <title>btn_google_light_normal_ios</title>
+                <desc>Created with Sketch.</desc>
+            
+                <g id="Google-Button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="btn_google_light_normal"  transform="translate(-1, -1)">
+                        <g id="logo_googleg_48dp" transform="translate(15, 15)">
+                            
+                          <path d="M17.64,9.20454545 C17.64,8.56636364 17.5827273,7.95272727 17.4763636,7.36363636 L9,7.36363636 L9,10.845 L13.8436364,10.845 C13.635,11.97 13.0009091,12.9231818 12.0477273,13.5613636 L12.0477273,15.8195455 L14.9563636,15.8195455 C16.6581818,14.2527273 17.64,11.9454545 17.64,9.20454545 L17.64,9.20454545 Z" id="Shape" fill="#4285F4" ></path>
+                          
+                            <path d="M9,18 C11.43,18 13.4672727,17.1940909 14.9563636,15.8195455 L12.0477273,13.5613636 C11.2418182,14.1013636 10.2109091,14.4204545 9,14.4204545 C6.65590909,14.4204545 4.67181818,12.8372727 3.96409091,10.71 L0.957272727,10.71 L0.957272727,13.0418182 C2.43818182,15.9831818 5.48181818,18 9,18 L9,18 Z"  fill="#34A853" ></path>
+                          
+                            <path d="M3.96409091,10.71 C3.78409091,10.17 3.68181818,9.59318182 3.68181818,9 C3.68181818,8.40681818 3.78409091,7.83 3.96409091,7.29 L3.96409091,4.95818182 L0.957272727,4.95818182 C0.347727273,6.17318182 0,7.54772727 0,9 C0,10.4522727 0.347727273,11.8268182 0.957272727,13.0418182 L3.96409091,10.71 L3.96409091,10.71 Z" fill="#FBBC05" ></path>
+                          
+                            <path d="M9,3.57954545 C10.3213636,3.57954545 11.5077273,4.03363636 12.4404545,4.92545455 L15.0218182,2.34409091 C13.4631818,0.891818182 11.4259091,0 9,0 C5.48181818,0 2.43818182,2.01681818 0.957272727,4.95818182 L3.96409091,7.29 C4.67181818,5.16272727 6.65590909,3.57954545 9,3.57954545 L9,3.57954545 Z"  fill="#EA4335" ></path>
+                          
+                        </g>
+                    </g>
+                </g>
+            </svg>
+                
+              </div>
+            
+              <div onClick="signIn()" class="center-wrapper  p1 google-color">
+                <div class="centerV ">
+                  <strong>Continua</strong> 
+                  <span class="lighter">con</span> 
+                  <strong>Google</strong>
+                </div>
+              </div>
+            
+            </div>
+      </div>
+    </div>
+  </body>
+</html>
